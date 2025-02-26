@@ -35,11 +35,12 @@ jobs:
             sudo systemctl start apache2
             sudo systemctl enable apache2
             sudo rm -rf /var/www/html/*
-            cd /home/ubuntu
+            cd /var/www/html/
             npm install
             npm run build
             cd build
             sudo mv /var/www/html/build/* /var/www/html
+            sudo npm start
             sudo chown -R www-data:www-data /var/www/html
             sudo chmod -R 755 /var/www/html
             sudo systemctl restart apache2
