@@ -36,10 +36,26 @@ jobs:
             sudo systemctl enable apache2
             sudo rm -rf /var/www/html/*
             cd /var/www/html/
-            npm install
-            npm run build
-            cd build
-            sudo mv /var/www/html/build/* /var/www/html
+                        # Ensure package.json exists before proceeding
+            if [ -f package.json ]; then
+              npm install --force
+              npm run build
+
+              # Move build files if the build directory exists
+              if [ -d build ]; then
+                sudo mv build/* /var/www/html/
+              else
+                echo "Error: Build directory does not exist."
+                exit 1
+              fi
+            else
+              echo "Error: package.json not found in /var/www/html."
+              exit 1
+            fi
+            #npm install
+            #npm run build
+            #cd build
+            #sudo mv /var/www/html/build/* /var/www/html
             sudo npm start
             sudo chown -R www-data:www-data /var/www/html
             sudo chmod -R 755 /var/www/html
