@@ -36,24 +36,10 @@ jobs:
             sudo systemctl enable apache2
             sudo rm -rf /var/www/html/*
             cd /home/ubuntu
-            # List the contents of the home directory
-            echo "Contents of /home/ubuntu:"
-            ls -la
-            # Ensure package.json exists
-            if [ -f package.json ]; then
-              npm install
-              npm run build
-              if [ -d build ]; then
-                cd build
-                sudo mv * /var/www/html
-              else
-                echo "Build directory does not exist."
-                exit 1
-              fi
-            else
-              echo "package.json does not exist."
-              exit 1
-            fi
+            npm install
+            npm run build
+            cd build
+            sudo mv * /var/www/html
             sudo chown -R www-data:www-data /var/www/html
             sudo chmod -R 755 /var/www/html
             sudo systemctl restart apache2
