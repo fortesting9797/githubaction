@@ -39,12 +39,13 @@ jobs:
             #cd /var/www/html/
             # Ensure package.json exists before proceeding
             if [ -f /var/www/html/package.json ]; then
-            rm -rf node_modules package-lock.json  
             cd /var/www/html/
+            rm -rf node_modules package-lock.json
+            npm cache clean --force
             npm install --force
             npm audit fix 
             npm run build
-            npm install react-scripts@latest eslint@latest --save-dev
+            #npm install react-scripts@latest eslint@latest --save-dev
 
               # Move build files if the build directory exists
               if [ -d build ]; then
