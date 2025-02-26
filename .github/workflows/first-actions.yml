@@ -21,7 +21,7 @@ jobs:
           SOURCE: "./"  # Adjust this if your package.json is in a subdirectory
           REMOTE_HOST: ${{ secrets.HOST_DNS }}
           REMOTE_USER: ${{ secrets.USERNAME }}
-          TARGET: "/var/www/html"
+          TARGET: ${{ secrets.TARGET_DIR }}
 
       - name: Executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@master
