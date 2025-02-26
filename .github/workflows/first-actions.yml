@@ -18,7 +18,7 @@ jobs:
         uses: easingthemes/ssh-deploy@v2.1.5
         env:
           SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
-          SOURCE: "./"
+          SOURCE: "./"  # Adjust this if your package.json is in a subdirectory
           REMOTE_HOST: ${{ secrets.HOST_DNS }}
           REMOTE_USER: ${{ secrets.USERNAME }}
           TARGET: ${{ secrets.TARGET_DIR }}
@@ -36,8 +36,8 @@ jobs:
             sudo systemctl enable apache2
             sudo rm -rf /var/www/html/*
             cd /home/ubuntu
-            sudo apt install nodejs npm -y
-            # List the contents of the project directory
+            # List the contents of the home directory
+            echo "Contents of /home/ubuntu:"
             ls -la
             # Ensure package.json exists
             if [ -f package.json ]; then
