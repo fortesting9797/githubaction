@@ -37,14 +37,14 @@ jobs:
             sudo chown -R $USER:$USER /var/www/html
             #sudo rm -rf /var/www/html/*
             #cd /var/www/html/
-            # rm -rf /var/www/html/node_modules
-            #rm -f /var/www/html/package-lock.json
             # Ensure package.json exists before proceeding
             if [ -f /var/www/html/package.json ]; then
-              cd /var/www/html/
-              npm install --force
-              npm audit fix 
-              npm run build
+            rm -rf node_modules package-lock.json  
+            cd /var/www/html/
+            npm install --force
+            npm audit fix 
+            npm run build
+            npm install react-scripts@latest eslint@latest --save-dev
 
               # Move build files if the build directory exists
               if [ -d build ]; then
