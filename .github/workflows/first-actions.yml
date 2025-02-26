@@ -37,12 +37,23 @@ jobs:
             sudo rm -rf /var/www/html/*
             cd /home/ubuntu
             sudo apt install nodejs npm -y
-            npm install
-            npm run build
-            cd build
-            sudo mv * /var/www/html
-            sudo mv /var/www/html/home/* /var/www/html
+            # List the contents of the project directory
+            ls -la
+            # Ensure package.json exists
+            if [ -f package.json ]; then
+              npm install
+              npm run build
+              if [ -d build ]; then
+                cd build
+                sudo mv * /var/www/html
+              else
+                echo "Build directory does not exist."
+                exit 1
+              fi
+            else
+              echo "package.json does not exist."
+              exit 1
+            fi
             sudo chown -R www-data:www-data /var/www/html
             sudo chmod -R 755 /var/www/html
             sudo systemctl restart apache2
-            sudo npm start
