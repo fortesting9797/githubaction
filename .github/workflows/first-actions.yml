@@ -21,7 +21,7 @@ jobs:
           SOURCE: "./"  # Adjust this if your package.json is in a subdirectory
           REMOTE_HOST: ${{ secrets.HOST_DNS }}
           REMOTE_USER: ${{ secrets.USERNAME }}
-          TARGET: ${{ secrets.TARGET_DIR }}
+          TARGET: "/var/www/html"
 
       - name: Executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@master
@@ -34,10 +34,11 @@ jobs:
             sudo apt install -y apache2
             sudo systemctl start apache2
             sudo systemctl enable apache2
-            sudo rm -rf /var/www/html/*
-            cd /var/www/html/
+            #sudo rm -rf /var/www/html/*
+            #cd /var/www/html/
             # Ensure package.json exists before proceeding
-            if [ -f package.json ]; then
+            if [ -f /var/www/html/package.json ]; then
+              cd /var/www/html/
               npm install --force
               npm run build
 
