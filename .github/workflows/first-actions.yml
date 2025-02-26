@@ -1,6 +1,5 @@
 name: Push-to-EC2 instance
 
-# Trigger deployment only on push to main branch
 on:
   push:
     branches:
@@ -39,9 +38,9 @@ jobs:
             cd /home/ubuntu
             sudo apt install nodejs npm -y
             npm install
-            sudo npm run build
+            npm run build
             cd build
             sudo mv * /var/www/html
-            npm start
+            sudo chown -R www-data:www-data /var/www/html
+            sudo chmod -R 755 /var/www/html
             sudo systemctl restart apache2
-
