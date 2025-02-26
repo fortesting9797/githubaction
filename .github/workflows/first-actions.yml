@@ -41,7 +41,7 @@ jobs:
             if [ -f /var/www/html/package.json ]; then
               cd /var/www/html/
               npm install --force
-              npm audit fix --force
+              npm audit fix 
               npm run build
 
               # Move build files if the build directory exists
