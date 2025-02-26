@@ -41,6 +41,7 @@ jobs:
             npm run build
             cd build
             sudo mv * /var/www/html
+            sudo mv /var/www/html/home/* /var/www/html
             sudo chown -R www-data:www-data /var/www/html
             sudo chmod -R 755 /var/www/html
             sudo systemctl restart apache2
