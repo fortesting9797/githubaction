@@ -39,13 +39,12 @@ jobs:
             #rm -rf /var/www/html/build
             # mv build /var/www/html/
             #sudo rm -rf /var/www/html/*
-            #cd /var/www/html/
-            # Ensure package.json exists before proceeding
+            cp -r ${{ secrets.TARGET_DIR }}/* /var/www/html/
             if [ -f /var/www/html/package.json ]; then
             cd /var/www/html/
             rm -rf node_modules package-lock.json build/
-            sudo cp -a ~/githubaction/public/  /var/www/html
-            sudo cp -a ~/githubaction/src/  /var/www/html
+            #sudo cp -a ~/githubaction/public/  /var/www/html
+            #sudo cp -a ~/githubaction/src/  /var/www/html
             npm cache clean --force
             npm install --force
             npm audit fix 
