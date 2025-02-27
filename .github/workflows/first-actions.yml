@@ -47,7 +47,7 @@ jobs:
             npm cache clean --force
             npm install --force
             npm audit fix 
-            mv build/* /var/www/html/
+            #mv build/* /var/www/html/
             npm run build
 
               # Move build files if the build directory exists
@@ -61,7 +61,7 @@ jobs:
               echo "Error: package.json not found in /var/www/html."
               exit 1
             fi
-            # sudo npm start
+            sudo npm start
             sudo chown -R www-data:www-data /var/www/html
             sudo chmod -R 755 /var/www/html
-            sudo systemctl restart apache2
+            #sudo systemctl restart apache2
