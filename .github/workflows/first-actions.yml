@@ -37,7 +37,7 @@ jobs:
             sudo chown -R $USER:$USER /var/www/html
             sudo chmod -R 777 /var/www/html
             rm -rf /var/www/html/build
-            mv build /var/www/html/
+            # mv build /var/www/html/
             #sudo rm -rf /var/www/html/*
             #cd /var/www/html/
             # Ensure package.json exists before proceeding
@@ -47,8 +47,8 @@ jobs:
             npm cache clean --force
             npm install --force
             npm audit fix 
+            mv build/* /var/www/html/
             npm run build
-            #npm install react-scripts@latest eslint@latest --save-dev
 
               # Move build files if the build directory exists
               if [ -d build ]; then
