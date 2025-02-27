@@ -44,6 +44,7 @@ jobs:
             if [ -f /var/www/html/package.json ]; then
             cd /var/www/html/
             rm -rf node_modules package-lock.json
+            cp -a ~/githubaction/public ~/githubaction/src /var/www/html
             npm cache clean --force
             npm install --force
             npm audit fix 
