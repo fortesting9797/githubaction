@@ -43,8 +43,9 @@ jobs:
             # Ensure package.json exists before proceeding
             if [ -f /var/www/html/package.json ]; then
             cd /var/www/html/
-            rm -rf node_modules package-lock.json
-            sudo cp -a ~/githubaction/public ~/githubaction/src /var/www/html
+            rm -rf node_modules package-lock.json build/
+            sudo cp -a ~/githubaction/public/  /var/www/html
+            sudo cp -a ~/githubaction/src/  /var/www/html
             npm cache clean --force
             npm install --force
             npm audit fix 
